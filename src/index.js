@@ -197,7 +197,7 @@ export default function InternProfile() {
       audio.removeEventListener('loadedmetadata', updateProgress);
       audio.removeEventListener('ended', handleEnded);
     };
-  }, [currentSongIdx]);
+  }, [currentSongIdx, isPlayingMusic]);
 
   useEffect(() => {
     if(!musicAudioRef.current) return;
@@ -212,9 +212,6 @@ export default function InternProfile() {
   useEffect(() => {
     const fetchGitHubContributions = async () => {
       try {
-        const response = await fetch('https://api.github.com/users/maki-matcha');
-        const user = await response.json();
-        
         // Use GitHub GraphQL to get contributions
         const query = `
           query {
