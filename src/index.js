@@ -1,18 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {
-  Box, Flex, VStack, HStack, Text, Button,
-  Heading, Card, CardBody, Badge, Icon, SimpleGrid, Avatar,
-  Table, Thead, Tbody, Tr, Th, Td, TableContainer,
+  Box, Flex, VStack, HStack, Text,
+  Heading, Card, CardBody, Badge, Icon,  Avatar,
   useColorModeValue, Tabs, TabList, TabPanels, Tab, TabPanel,
-  Input, Grid, GridItem, Wrap, WrapItem, Tag, Tooltip, Image, Divider,
+  Grid, GridItem, Wrap, WrapItem, Tag, Tooltip, Image, Divider,
   AspectRatio, Slider, SliderTrack, SliderFilledTrack, SliderThumb
 } from '@chakra-ui/react';
 import { keyframes } from '@emotion/react';
 import { 
-  FiMapPin, FiMail, FiLink, FiGithub, FiBookOpen, 
-  FiBriefcase, FiGrid, FiPlus, FiCheckCircle,
+  FiMapPin, FiMail, FiGithub, FiBookOpen, 
   FiPlay, FiPause, FiSkipForward, FiSkipBack, FiMusic, FiVideo
 } from 'react-icons/fi';
+import ReactDOM from 'react-dom/client';
+import App from './App';
 
 // --- ANIMATIONS ---
 const waveAnimation = keyframes`
@@ -112,7 +112,6 @@ const playlist = [
 export default function InternProfile() {
   const textColor = useColorModeValue('gray.800', 'white');
   const mutedText = useColorModeValue('gray.600', 'gray.300');
-  const borderColor = useColorModeValue('gray.200', 'gray.700');
   const brandAccent = useColorModeValue('#012034', 'blue.300');
   
   const emptyColor = useColorModeValue('whiteAlpha.500', 'blackAlpha.300');
@@ -130,30 +129,10 @@ export default function InternProfile() {
   const glassCardBg = useColorModeValue('whiteAlpha.800', 'blackAlpha.500');
   
   const dotBg = useColorModeValue("blackAlpha.300", "whiteAlpha.300");
-  const tableHeadBg = useColorModeValue('blackAlpha.50', 'whiteAlpha.50');
   const dividerColor = useColorModeValue('blackAlpha.200', 'whiteAlpha.200');
-  const btnBg = useColorModeValue('white', 'whiteAlpha.200');
-  const btnHoverBg = useColorModeValue('gray.50', 'whiteAlpha.300');
-  const camBorderColor = useColorModeValue('white', 'gray.800');
 
   // Removed fileInputRef since image upload is no longer needed
 
-  const [dailyTasks, setDailyTasks] = useState([
-    { id: 1, date: 'Oct 26, 2024', description: 'Redesigned DTR Dashboard UI', status: 'Completed' },
-    { id: 2, date: 'Oct 26, 2024', description: 'Cable Management in Server Room', status: 'In Progress' }
-  ]);
-  const [newTaskInput, setNewTaskInput] = useState('');
-
-  const handleAddTask = () => {
-    if (!newTaskInput.trim()) return;
-    const date = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    setDailyTasks([{ id: Date.now(), date, description: newTaskInput, status: 'In Progress' }, ...dailyTasks]);
-    setNewTaskInput('');
-  };
-
-  const handleMarkDone = (id) => {
-    setDailyTasks(dailyTasks.map(t => t.id === id ? { ...t, status: 'Completed' } : t));
-  };
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -696,3 +675,7 @@ export default function InternProfile() {
     </Box>
   );
 }
+
+// Mount React App
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
