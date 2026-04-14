@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
-import Makiprofile from './makiprofile';
+import InternProfile from './index';
 
 // Set up the global theme
 const theme = extendTheme({
@@ -13,7 +13,7 @@ const theme = extendTheme({
 export default function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Makiprofile />
+      <InternProfile />
     </ChakraProvider>
   );
 }
