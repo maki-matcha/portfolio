@@ -298,45 +298,49 @@ export default function InternProfile() {
 
   return (
     <Box 
-      m={{ base: -4, md: -8 }} 
-      p={{ base: 6, md: 10 }} 
+      m={0}
+      p={{ base: 3, sm: 4, md: 8, lg: 10 }} 
       bg={bgGradient}
       backgroundSize="400% 400%"
       animation={`${waveAnimation} 15s ease infinite`}
-      minH="calc(100vh - 70px)"
+      minH="100vh"
       position="relative"
+      width="100%"
+      overflowX="hidden"
     >
       {/* FLOATING MUSIC CONTROLLER */}
       <Box
         position="fixed"
-        bottom={isPlayerActive ? "24px" : "-100px"}
+        bottom={isPlayerActive ? { base: "16px", md: "24px" } : "-100px"}
         opacity={isPlayerActive ? 1 : 0}
-        right="24px"
+        right={{ base: "12px", md: "24px" }}
+        left={{ base: "12px", md: "auto" }}
         zIndex={1000}
         bg={glassBg}
         backdropFilter="blur(16px)"
-        p={2}
-        pr={5}
+        p={{ base: "8px", md: "8px" }}
+        pr={{ base: 3, md: 5 }}
         borderRadius="full"
         boxShadow="dark-lg"
         display="flex"
         alignItems="center"
-        gap={4}
+        gap={{ base: 2, md: 4 }}
         border="1px solid"
         borderColor={glassBorder}
         transition="all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)"
+        maxW={{ base: "calc(100vw - 24px)", md: "auto" }}
       >
         <Box position="relative">
           <Image 
             src={playlist[currentSongIdx].cover} 
-            boxSize="44px" 
+            boxSize={{ base: "36px", md: "44px" }} 
             borderRadius="full" 
             animation={isPlayingMusic ? `${spin} 4s linear infinite` : 'none'}
             border="2px solid #1DB954"
             objectFit="cover"
           />
           {/* Vinyl Record Center Hole */}
-          <Box position="absolute" top="50%" left="50%" transform="translate(-50%, -50%)" boxSize="10px" bg={useColorModeValue('white','black')} borderRadius="full" />
+          <Box position="absolute" top="50%" left="50%" transform="translate(-50%, -50%)" boxSize="8px" bg={useColorModeValue('white','black')} borderRadius="full" />
         </Box>
         
         <VStack align="start" spacing={0} w={{ base: "80px", md: "120px" }} overflow="hidden">
@@ -359,21 +363,24 @@ export default function InternProfile() {
         </HStack>
       </Box>
 
-      <Grid templateColumns={{ base: "1fr", xl: "320px 1fr" }} gap={8}>
+      <Grid templateColumns={{ base: "1fr", md: "1fr", lg: "1fr", xl: "320px 1fr" }} gap={{ base: 4, md: 6, lg: 8 }} autoRows="auto" maxW="1400px" mx="auto" w="100%">
         
         {/* LEFT COLUMN: User Info */}
-        <GridItem>
+        <GridItem colSpan={{ base: 1, md: 1, xl: 1 }} order={{ base: 2, md: 2, xl: 1 }} w="100%">
           <VStack 
             align="stretch" 
             spacing={6} 
             bg={glassBg} 
             backdropFilter="blur(12px)" 
-            p={8} 
+            p={{ base: 4, md: 6, lg: 8 }} 
             borderRadius="2xl" 
             border="1px solid" 
             borderColor={glassBorder}
             boxShadow="xl"
             animation={`${fadeIn} 0.5s ease-out forwards`}
+            position="sticky"
+            top={{ base: "auto", xl: "20px" }}
+            mx="auto"
           >
             {/* PROFILE PICTURE */}
             <Box w="fit-content" mx="auto" animation={`${float} 6s ease-in-out infinite`}>
@@ -381,55 +388,55 @@ export default function InternProfile() {
             </Box>
 
             <Box textAlign="center">
-              <Heading size="lg" color={textColor} mb={1}>Vincent Louise Collamat</Heading>
-              <Text fontSize="md" color={mutedText} fontWeight="medium" letterSpacing="wide">Aspiring Frontend Developer</Text>
+              <Heading size={{ base: "md", md: "lg" }} color={textColor} mb={1}>Vincent Louise Collamat</Heading>
+              <Text fontSize={{ base: "sm", md: "md" }} color={mutedText} fontWeight="medium" letterSpacing="wide">Aspiring Frontend Developer</Text>
             </Box>
             
-            <Text color={textColor} fontSize="sm" textAlign="center" lineHeight="tall">
+            <Text color={textColor} fontSize={{ base: "xs", md: "sm" }} textAlign="center" lineHeight="tall">
               Passionate IT Intern specializing in frontend development, UI/UX design, and systems architecture. Always eager to learn new tech.
             </Text>
             
-            <VStack align="stretch" spacing={4} mt={2} fontSize="sm" color={textColor}>
-              <HStack><Icon as={FiMapPin} color={mutedText} boxSize={4} /><Text>San Jose, Antique, Philippines</Text></HStack>
-              <HStack><Icon as={FiMail} color={mutedText} boxSize={4} /><Text as="a" href="mailto:collamatvincent@sac.edu.ph" _hover={{ color: brandAccent }}>collamatvincent@sac.edu.ph</Text></HStack>
-              <HStack><Icon as={FiGithub} color={mutedText} boxSize={4} /><Text as="a" href="https://github.com/maki-matcha" target="_blank" _hover={{ color: brandAccent }}>@maki-matcha</Text></HStack>
+            <VStack align="stretch" spacing={4} mt={2} fontSize={{ base: "xs", md: "sm" }} color={textColor}>
+              <HStack gap={{ base: 2, md: 3 }}><Icon as={FiMapPin} color={mutedText} boxSize={4} /><Text isTruncated>San Jose, Antique, Philippines</Text></HStack>
+              <HStack gap={{ base: 2, md: 3 }}><Icon as={FiMail} color={mutedText} boxSize={4} /><Text as="a" href="mailto:collamatvincent@sac.edu.ph" _hover={{ color: brandAccent }} isTruncated>collamatvincent@sac.edu.ph</Text></HStack>
+              <HStack gap={{ base: 2, md: 3 }}><Icon as={FiGithub} color={mutedText} boxSize={4} /><Text as="a" href="https://github.com/maki-matcha" target="_blank" _hover={{ color: brandAccent }}>@maki-matcha</Text></HStack>
             </VStack>
             
             <Divider borderColor={dividerColor} />
             
             <Box>
-              <Heading size="xs" color={mutedText} mb={4} textTransform="uppercase" letterSpacing="widest">Top Skills</Heading>
-              <Wrap spacing={3}>
-                <WrapItem><Tag size="md" variant="subtle" colorScheme="cyan" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>React</Tag></WrapItem>
-                <WrapItem><Tag size="md" variant="subtle" colorScheme="yellow" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>JavaScript</Tag></WrapItem>
-                <WrapItem><Tag size="md" variant="subtle" colorScheme="teal" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>Chakra UI</Tag></WrapItem>
-                <WrapItem><Tag size="md" variant="subtle" colorScheme="green" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>Node.js</Tag></WrapItem>
-                <WrapItem><Tag size="md" variant="subtle" colorScheme="gray" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>Express</Tag></WrapItem>
-                <WrapItem><Tag size="md" variant="subtle" colorScheme="green" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>MongoDB</Tag></WrapItem>
-                <WrapItem><Tag size="md" variant="subtle" colorScheme="pink" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>Figma</Tag></WrapItem>
-                <WrapItem><Tag size="md" variant="subtle" colorScheme="purple" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>PHP</Tag></WrapItem>
-                <WrapItem><Tag size="md" variant="subtle" colorScheme="blue" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>MERN stack</Tag></WrapItem>
-                <WrapItem><Tag size="md" variant="solid" bg="black" color="white" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>Next.js</Tag></WrapItem>
-                <WrapItem><Tag size="md" variant="subtle" colorScheme="cyan" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>TailwindCSS</Tag></WrapItem>
-                <WrapItem><Tag size="md" variant="subtle" colorScheme="orange" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>HTML5</Tag></WrapItem>
-                <WrapItem><Tag size="md" variant="solid" bg="black" color="white" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>Vercel</Tag></WrapItem>
+              <Heading size="xs" color={mutedText} mb={4} textTransform="uppercase" letterSpacing="widest" fontSize={{ base: "2xs", md: "xs" }}>Top Skills</Heading>
+              <Wrap spacing={{ base: 2, md: 3 }}>
+                <WrapItem><Tag size={{ base: "sm", md: "md" }} variant="subtle" colorScheme="cyan" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>React</Tag></WrapItem>
+                <WrapItem><Tag size={{ base: "sm", md: "md" }} variant="subtle" colorScheme="yellow" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>JavaScript</Tag></WrapItem>
+                <WrapItem><Tag size={{ base: "sm", md: "md" }} variant="subtle" colorScheme="teal" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>Chakra UI</Tag></WrapItem>
+                <WrapItem><Tag size={{ base: "sm", md: "md" }} variant="subtle" colorScheme="green" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>Node.js</Tag></WrapItem>
+                <WrapItem><Tag size={{ base: "sm", md: "md" }} variant="subtle" colorScheme="gray" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>Express</Tag></WrapItem>
+                <WrapItem><Tag size={{ base: "sm", md: "md" }} variant="subtle" colorScheme="green" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>MongoDB</Tag></WrapItem>
+                <WrapItem><Tag size={{ base: "sm", md: "md" }} variant="subtle" colorScheme="pink" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>Figma</Tag></WrapItem>
+                <WrapItem><Tag size={{ base: "sm", md: "md" }} variant="subtle" colorScheme="purple" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>PHP</Tag></WrapItem>
+                <WrapItem><Tag size={{ base: "sm", md: "md" }} variant="subtle" colorScheme="blue" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>MERN stack</Tag></WrapItem>
+                <WrapItem><Tag size={{ base: "sm", md: "md" }} variant="solid" bg="black" color="white" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>Next.js</Tag></WrapItem>
+                <WrapItem><Tag size={{ base: "sm", md: "md" }} variant="subtle" colorScheme="cyan" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>TailwindCSS</Tag></WrapItem>
+                <WrapItem><Tag size={{ base: "sm", md: "md" }} variant="subtle" colorScheme="orange" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>HTML5</Tag></WrapItem>
+                <WrapItem><Tag size={{ base: "sm", md: "md" }} variant="solid" bg="black" color="white" transition="all 0.2s" _hover={{ transform: 'scale(1.1)' }}>Vercel</Tag></WrapItem>
               </Wrap>
             </Box>
           </VStack>
         </GridItem>
 
-        <GridItem>
+        <GridItem order={{ base: 1, md: 1, xl: 2 }} w="100%">
           <Tabs colorScheme="blue" variant="line">
-            <TabList borderColor={dividerColor} mb={6}>
-              <Tab fontWeight="bold" color={mutedText} _selected={{ color: textColor, borderColor: brandAccent }}><HStack><Icon as={FiBookOpen}/><Text>Overview</Text></HStack></Tab>
-              <Tab fontWeight="bold" color={mutedText} _selected={{ color: textColor, borderColor: brandAccent }}><HStack><Icon as={FiMusic}/><Text>Hobbies</Text></HStack></Tab>
+            <TabList borderColor={dividerColor} mb={6} overflowX={{ base: "auto", md: "visible" }}>
+              <Tab fontWeight="bold" color={mutedText} fontSize={{ base: "sm", md: "md" }} _selected={{ color: textColor, borderColor: brandAccent }}><HStack gap={{ base: 1, md: 2 }}><Icon as={FiBookOpen}/><Text>Overview</Text></HStack></Tab>
+              <Tab fontWeight="bold" color={mutedText} fontSize={{ base: "sm", md: "md" }} _selected={{ color: textColor, borderColor: brandAccent }}><HStack gap={{ base: 1, md: 2 }}><Icon as={FiMusic}/><Text>Hobbies</Text></HStack></Tab>
             </TabList>
             
             <TabPanels>
               <TabPanel p={0}>
                 
                 <Flex justify="space-between" align="center" mb={4} animation={`${fadeIn} 0.5s ease-out forwards`}>
-                  <Text fontSize="lg" fontWeight="bold" color={textColor}>Featured Projects</Text>
+                  <Text fontSize={{ base: "md", md: "lg" }} fontWeight="bold" color={textColor}>Featured Projects</Text>
                 </Flex>
                 
                 <Box position="relative" mb={8} w="full">
@@ -443,29 +450,30 @@ export default function InternProfile() {
                         overflow="hidden" 
                         shadow="xl"
                         animation={`${fadeIn} 0.6s ease-out forwards`}
-                        h={{ base: "auto", md: "250px" }}
+                        h={{ base: "auto", sm: "auto", md: "280px" }}
                         border="1px solid"
                         borderColor={glassBorder}
                         _hover={{ transform: 'translateY(-4px)', shadow: '2xl' }}
                         transition="all 0.3s ease"
                       >
-                        <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} h="100%">
+                        <Grid templateColumns={{ base: "1fr", sm: "1fr", md: "1fr 1.2fr" }} h="100%" gap={0}>
                           <Image 
                             src={project.img} 
                             alt={project.title} 
-                            h={{ base: "200px", md: "100%" }}
+                            h={{ base: "180px", sm: "220px", md: "100%" }}
                             w="100%"
                             objectFit="cover"
                             objectPosition="top"
                           />
-                          <CardBody display="flex" flexDirection="column" justify="center" p={8}>
-                            <HStack justify="space-between" mb={4}>
-                              <Heading size="md" color={textColor}>{project.title}</Heading>
-                              <Badge colorScheme={project.color} px={2} py={1} borderRadius="md">{project.badge}</Badge>
+                          <CardBody display="flex" flexDirection="column" justify="center" p={{ base: 4, md: 6 }}>
+                            <HStack justify="space-between" mb={4} gap={2} flexWrap="wrap">
+                              <Heading size={{ base: "sm", md: "md" }} color={textColor} isTruncated>{project.title}</Heading>
+                              <Badge colorScheme={project.color} px={2} py={1} borderRadius="md" fontSize="xs">{project.badge}</Badge>
                             </HStack>
-                            <Text fontSize="md" color={mutedText} mb={6} lineHeight="tall">{project.desc}</Text>
-                            <HStack spacing={4} fontSize="sm" color={mutedText} fontWeight="bold">
-                              <HStack><Box w="12px" h="12px" borderRadius="full" bg={project.techColor} /><Text>{project.tech}</Text></HStack>
+                            <Text fontSize={{ base: "sm", md: "md" }} color={mutedText} mb={6} lineHeight="tall" display={{ base: "none", md: "block" }}>{project.desc}</Text>
+                            <Text fontSize={{ base: "xs", md: "sm" }} color={mutedText} mb={4} lineHeight="tall" display={{ base: "block", md: "none" }} noOfLines={2}>{project.desc}</Text>
+                            <HStack spacing={4} fontSize={{ base: "xs", md: "sm" }} color={mutedText} fontWeight="bold" gap={2}>
+                              <HStack><Box w="12px" h="12px" borderRadius="full" bg={project.techColor} /><Text isTruncated>{project.tech}</Text></HStack>
                             </HStack>
                           </CardBody>
                         </Grid>
@@ -488,7 +496,7 @@ export default function InternProfile() {
                   </HStack>
                 </Box>
 
-                <Text fontSize="lg" fontWeight="bold" mt={8} mb={4} color={textColor} animation={`${fadeIn} 0.5s ease-out forwards`}>Experience & Education</Text>
+                <Text fontSize={{ base: "md", md: "lg" }} fontWeight="bold" mt={8} mb={4} color={textColor} animation={`${fadeIn} 0.5s ease-out forwards`}>Experience & Education</Text>
                 <VStack 
                   align="stretch" 
                   spacing={6} 
@@ -497,28 +505,28 @@ export default function InternProfile() {
                   animation={`${fadeIn} 0.5s ease-out forwards`}
                   _before={{ content: '""', position: "absolute", left: "19px", top: "10px", bottom: "10px", width: "2px", bg: useColorModeValue('blue.200', 'blue.700') }}
                 >
-                  <Box pl={10} position="relative">
-                    <Box position="absolute" left="13px" top="4px" boxSize="14px" borderRadius="full" bg={brandAccent} border="3px solid" borderColor={useColorModeValue('#f0f9ff', '#0f172a')} />
-                    <Heading size="sm" color={textColor}>IT Intern</Heading>
+                  <Box pl={{ base: 0, md: 10 }} position="relative">
+                    <Box position="absolute" left={{ base: "-999px", md: "13px" }} top="4px" boxSize="14px" borderRadius="full" bg={brandAccent} border="3px solid" borderColor={useColorModeValue('#f0f9ff', '#0f172a')} display={{ base: "none", md: "block" }} />
+                    <Heading size="sm" color={textColor} fontSize={{ base: "md", md: "md" }}>IT Intern</Heading>
                     <Text fontSize="xs" color={brandAccent} fontWeight="bold" mt={1}>TechnoPH Systems & Integration Inc. • Present</Text>
-                    <Text fontSize="sm" color={mutedText} mt={2}>Developing responsive UI interfaces using React and Chakra UI. Implemented a fully functional DTR Dashboard with activity tracking and other features.</Text>
+                    <Text fontSize={{ base: "xs", md: "sm" }} color={mutedText} mt={2}>Developing responsive UI interfaces using React and Chakra UI. Implemented a fully functional DTR Dashboard with activity tracking and other features.</Text>
                   </Box>
-                  <Box pl={10} position="relative">
-                    <Box position="absolute" left="13px" top="4px" boxSize="14px" borderRadius="full" bg={brandAccent} border="3px solid" borderColor={useColorModeValue('#f0f9ff', '#0f172a')} />
-                    <Heading size="sm" color={textColor}>Capstone Defended</Heading>
+                  <Box pl={{ base: 0, md: 10 }} position="relative">
+                    <Box position="absolute" left={{ base: "-999px", md: "13px" }} top="4px" boxSize="14px" borderRadius="full" bg={brandAccent} border="3px solid" borderColor={useColorModeValue('#f0f9ff', '#0f172a')} display={{ base: "none", md: "block" }} />
+                    <Heading size="sm" color={textColor} fontSize={{ base: "md", md: "md" }}>Capstone Defended</Heading>
                     <Text fontSize="xs" color={brandAccent} fontWeight="bold" mt={1}>CAP102 • AY 2025-2026</Text>
-                    <Text fontSize="sm" color={mutedText} mt={2}>Took the Frontend role in Developing “An IoT-based Smart Distress Signal for Fast Emergency Response in San Jose de Buenavista”.</Text>
+                    <Text fontSize={{ base: "xs", md: "sm" }} color={mutedText} mt={2}>Took the Frontend role in Developing "An IoT-based Smart Distress Signal for Fast Emergency Response in San Jose de Buenavista".</Text>
                   </Box>
-                  <Box pl={10} position="relative">
-                    <Box position="absolute" left="13px" top="4px" boxSize="14px" borderRadius="full" bg={brandAccent} border="3px solid" borderColor={useColorModeValue('#f0f9ff', '#0f172a')} />
-                    <Heading size="sm" color={textColor}>BS Information Technology</Heading>
+                  <Box pl={{ base: 0, md: 10 }} position="relative">
+                    <Box position="absolute" left={{ base: "-999px", md: "13px" }} top="4px" boxSize="14px" borderRadius="full" bg={brandAccent} border="3px solid" borderColor={useColorModeValue('#f0f9ff', '#0f172a')} display={{ base: "none", md: "block" }} />
+                    <Heading size="sm" color={textColor} fontSize={{ base: "md", md: "md" }}>BS Information Technology</Heading>
                     <Text fontSize="xs" color={brandAccent} fontWeight="bold" mt={1}>St. Anthony's College • 2021 - Present</Text>
-                    <Text fontSize="sm" color={mutedText} mt={2}>Specializing in Web Development and Systems Design with a passion for modern frontend frameworks.</Text>
+                    <Text fontSize={{ base: "xs", md: "sm" }} color={mutedText} mt={2}>Specializing in Web Development and Systems Design with a passion for modern frontend frameworks.</Text>
                   </Box>
                 </VStack>
 
-                <Text fontSize="lg" fontWeight="bold" mb={2} color={textColor} animation={`${fadeIn} 0.5s ease-out forwards`}>Activity Overview</Text>
-                <Text fontSize="sm" mb={4} color={mutedText} animation={`${fadeIn} 0.5s ease-out forwards`}>{totalContributions} contributions on GitHub this year</Text>
+                <Text fontSize={{ base: "md", md: "lg" }} fontWeight="bold" mb={2} color={textColor} animation={`${fadeIn} 0.5s ease-out forwards`}>Activity Overview</Text>
+                <Text fontSize={{ base: "xs", md: "sm" }} mb={4} color={mutedText} animation={`${fadeIn} 0.5s ease-out forwards`}>{totalContributions} contributions on GitHub this year</Text>
                 <Card variant="filled" bg={glassCardBg} backdropFilter="blur(10px)" p={6} mb={10} shadow="sm" border="1px solid" borderColor={glassBorder} animation={`${fadeIn} 0.5s ease-out forwards`} position="relative" zIndex={1}>
                   <Flex wrap="wrap" gap="4px" maxW="100%" position="relative" zIndex={1}>{generateContributions()}</Flex>
                   <HStack mt={5} fontSize="xs" color={mutedText} justify="flex-end" spacing={2} fontWeight="bold">
@@ -538,9 +546,9 @@ export default function InternProfile() {
               {/* TAB 2: HOBBIES */}
               <TabPanel p={0}>
                 <Box animation={`${fadeIn} 0.5s ease-out forwards`}>
-                  <Text fontSize="lg" fontWeight="bold" mb={6} color={textColor}>Hobbies & Interests</Text>
+                  <Text fontSize={{ base: "md", md: "lg" }} fontWeight="bold" mb={6} color={textColor}>Hobbies & Interests</Text>
                   
-                  <Grid templateColumns={{ base: "1fr", xl: "1.3fr 1fr" }} gap={6} mb={8} alignItems="stretch">
+                  <Grid templateColumns={{ base: "1fr", md: "1fr", lg: "1.3fr 1fr" }} gap={6} mb={8} alignItems="stretch">
                     
                     {/* VALORANT GAMEPLAY VIDEO */}
                     <GridItem w="full" display="flex" flexDirection="column">
