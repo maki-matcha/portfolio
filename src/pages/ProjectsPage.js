@@ -14,16 +14,14 @@ import {
   Stack,
   Text,
   Badge,
-  useColorModeValue,
 } from '@chakra-ui/react';
 import { ArrowLeft } from 'lucide-react';
-import { featuredProjects, siteMeta } from '../data';
+import { featuredProjects } from '../data';
 
 export default function ProjectsPage() {
   const pageBg = '#F9F9F9';
   const cardBg = '#FFFFFF';
   const borderColor = '#E0E0E0';
-  const accent = '#888888';
   const textColor = '#121212';
   const mutedText = '#666666';
 

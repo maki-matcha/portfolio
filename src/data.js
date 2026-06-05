@@ -1,4 +1,4 @@
-﻿export const siteMeta = {
+export const siteMeta = {
   name: 'Vincent Louise Collamat',
   subtitle: 'Junior Web Developer',
   location: 'Antique, Philippines',

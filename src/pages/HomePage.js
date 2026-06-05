@@ -1,6 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   Box,
   Button,
@@ -20,27 +20,14 @@ import {
   VStack,
   Badge,
   Avatar,
-  useColorModeValue,
   Icon,
 } from '@chakra-ui/react';
 import {
   ArrowRight,
-  Mail,
-  GitBranch,
-  Briefcase,
-  Award,
   MapPin,
-  ChevronDown,
   Star,
   Code2,
   Zap,
-  AtSign,
-  UserCheck,
-  Database,
-  Layers,
-  Server,
-  Terminal,
-  PackageCheck
 } from 'lucide-react';
 import {
   SiReact,
@@ -58,7 +45,7 @@ import {
   SiGmail,
   SiGithub,
 } from 'react-icons/si';
-import { siteMeta, profileSummary, educationTimeline, certificates, techStack, featuredProjects, achievements } from '../data';
+import { siteMeta, profileSummary, techStack, featuredProjects } from '../data';
 
 const typePhrases = ['Antique, Philippines', 'Web Developer', 'Aspiring AI Engineer'];
 const phraseIcons = {
@@ -66,9 +53,6 @@ const phraseIcons = {
   'Web Developer': Code2,
   'Aspiring AI Engineer': Zap,
 };
-const MotionBox = motion(Box);
-const MotionCard = motion(Card);
-
 const contactLinks = [
   { label: 'Email', href: 'mailto:xdcollamatxd@gmail.com', icon: SiGmail },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/vincent-louise-collamat-697434394/', icon: ArrowRight },

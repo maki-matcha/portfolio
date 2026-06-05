@@ -17,10 +17,9 @@ import {
   Badge,
   Image,
   Wrap,
-  useColorModeValue,
 } from '@chakra-ui/react';
 import { ArrowLeft, Layers, Zap, Calendar, CheckCircle2 } from 'lucide-react';
-import { featuredProjects, siteMeta } from '../data';
+import { featuredProjects } from '../data';
 
 export default function ProjectOverviewPage() {
   const { id } = useParams();
@@ -28,7 +27,6 @@ export default function ProjectOverviewPage() {
   const project = featuredProjects.find((item) => item.id === id);
   const cardBg = '#FFFFFF';
   const borderColor = '#E0E0E0';
-  const accent = '#888888';
   const textColor = '#121212';
   const mutedText = '#666666';
   const pageBg = '#F9F9F9';
